@@ -1,27 +1,31 @@
 package vehiculos;
 
-//Importaciones
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Fabricante {
 	
 	//Atributos
 	private String nombre;
 	private Pais pais;
-	//Este diccionario almacena ventas realizadas por fabricante
-	static Map<Fabricante, Integer> ventasPorFabrica = new HashMap <Fabricante, Integer>();
+
+	public static ArrayList<Fabricante> fabricas = new ArrayList<Fabricante>();
+
+	
 
 	//Constructor
 	public Fabricante(String nombre, Pais pais) {
 		this.nombre = nombre;
 		this.pais = pais;	
 	}
-	
-	//aquí debería ir el método fabricaMayorVentas() pero xD
 
+
+	public static Fabricante fabricaMayorVentas(){
+		
+		Map<Fabricante,Long> counts = fabricas.stream().collect(Collectors.groupingBy(e -> e,Collectors.counting()));
+		Fabricante s = counts.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
+		return s;
+	}
 
 	//Getters y Setters
 	public String getNombre() {

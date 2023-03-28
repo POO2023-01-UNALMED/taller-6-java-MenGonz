@@ -1,5 +1,8 @@
 package vehiculos;
 
+
+
+
 public class Vehiculo {
 
 	//Atributos
@@ -12,6 +15,9 @@ public class Vehiculo {
 	private String traccion;
 	private Fabricante fabricante;
 	private static int cantidadVehiculos;
+	//-----------------------------------------------------------------------------------
+	
+
 	
 
 	//Constructor
@@ -25,31 +31,21 @@ public class Vehiculo {
 		this.peso = peso;
 		this.traccion = traccion;
 		this.fabricante = fabricante;
-		
-		if (Pais.ventasPorPais.containsKey(fabricante.getPais())) {
-			 Pais.ventasPorPais.put(fabricante.getPais(), Pais.ventasPorPais.get(fabricante.getPais()) + 1); 
-	    } else {
-	    	 Pais.ventasPorPais.put(fabricante.getPais(), 1);    
-	    }
-		
-		if (Fabricante.ventasPorFabrica.containsKey(fabricante)) {
-			Fabricante.ventasPorFabrica.put(fabricante, Fabricante.ventasPorFabrica.get(fabricante) + 1);
-	    } else {
-	    	Fabricante.ventasPorFabrica.put(fabricante, 1);
-	    }
-		
+		//Cada que se cree un objeto de esta clase, se aumentará esta variable
 		cantidadVehiculos++;	
+
+		Fabricante.fabricas.add(fabricante);
+		Pais.paises.add(fabricante.getPais());
 	}
 
 
-	//Método
+	//Métodos
 	public static String vehiculosPorTipo()
 	{
 		return "Automoviles: " + Automovil.getCantidadAutomoviles()+
 				"\nCamionetas: " + Camioneta.getCantidadCamionetas() +
 				"\nCamiones: " + Camion.getCantidadCamiones();
 	}
-	
 
 	//Getters y Setters
 	public String getPlaca() {
